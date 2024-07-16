@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ var vndMoney = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+@{ var user = Session["Account"] as ClothingShop.Models.Customer;}
+
+
+
+<div class="main-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 img-prod">
+                <img style="width: 100%;" src="~/Images/@ViewBag.Product.ImagePro" alt="">
+            </div>
+
+            <div class="col-lg-7" style="padding: 10px 55px;" >
+                <h2>@ViewBag.Product.ProductName</h2>
+
+                <div class="price-detail"> giá: <h3>@String.Format(vndMoney, "{0:c0}", ViewBag.Product.price)</h3></div>
+
+                <div class="rating-area">
+                    <h5>Đánh giá trung bình</h5>
+                    <p class="card-text rating-item">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </p>
+                </div>
+
+                <div class="describe">
+
+                    <span>Mô tả : </span> @ViewBag.Product.DecriptionPro
+
+                </div>
+
+                <div class="status-prod">
+                    Tình trạng : <span style="color:green ;"><i class="bi bi-check-circle-fill"></i> Còn hàng</span>
+                </div>
+                @if (user != null)
+                {
+                    <div class="add-to-card-form">
+                        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                        {
+                            <input type="number" min="1" value="1" name="Quantity" style="width:80px" class="form-control"><br />
+                            <input type="hidden" value="@ViewBag.Product.ProductID" name="ProductID" />
+                            <button type="submit" class="btn btn-primary px-3"> <i class="bi bi-cart-plus"></i> Thêm vào giỏ hàng</button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="add-to-card-form">
+                        <form>
+                            <input type="number" min="1" value="1" name="Quantity" style="width:80px" class="form-control"><br />
+                            <input type="hidden" value="@ViewBag.Product.ProductID" name="ProductID" />
+                            <a href="@Url.Action("Login","Users")" class="btn add-to-card-btn" style="color:#fff"> <i class="bi bi-cart-plus"></i> Thêm vào giỏ hàng</a>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="container page-body">
+            <div class="text-center mb-4">
+                <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+            </div>
+            <div class=" row product-list">
+
+                @foreach (var item in ViewBag.ProdList)
+                {
+                    if (item.ProductID <= 3)
+                    {
+                        <!-- product -->
+                        <div class="card col-sm-4 col-md-4 col-lg-4 d-flex align-items-stretch book-section">
+                            <div class="#" style="flex:auto">
+                                <a href="@Url.Action("Index/"+item.ProductID,"ProductDetail")" class="card-title"> <img class="card-img-top book-picture" style="height:50%" src="~/Images/@item.ImagePro" alt="Card image cap"> </a>
+                                <div class="card-body">
+                                    <a href="@Url.Action("Index/"+item.ProductID,"ProductDetail")" class="card-title"><h5>@item.ProductName</h5></a>
+                                    <h6 style="color:darkred">@String.Format(vndMoney, "{0:c0}", item.price)</h6>
+                                    <p class="card-text rating-item">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </p>
+
+                                    @if (user != null)
+                                    {
+                                        <a href="@Url.Action("AddSingleToCart/" + item.ProductID, "Cart")" class="btn btn-primary px-3" style="width:100%"><i class="bi bi-cart-plus"></i> Thêm vào giỏ hàng</a>
+
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Login", "Users")" class="btn btn-primary px-3" style="width:100%"><i class="bi bi-cart-plus"></i> Thêm vào giỏ hàng</a>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- end-product -->
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

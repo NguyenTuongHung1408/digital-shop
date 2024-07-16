@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ClothingShop.Models.NSX>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Danh mục nhà sản xuất</h2>
+
+<p>
+    @Html.ActionLink("Thêm nhà sản xuất mới", "Create")
+</p>
+<table border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNSX)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNSX)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.IDnsx }) |
+
+                @Html.ActionLink("Xóa", "Delete", new { id = item.IDnsx })
+            </td>
+        </tr>
+    }
+
+</table>

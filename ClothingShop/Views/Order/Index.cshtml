@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ClothingShop.Models.DonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container" style="min-height:600px;margin-top:50px">
+    <table class="table">
+        <tr>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Trạng thái đơn hàng
+            </th>
+            
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Customer.CustomerName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @if (item.Status == 0)
+                    {
+                        <span>Chưa xác nhận</span>
+                    }
+                    else
+                    {
+                        <span>Đã xác nhận</span>
+
+                    }
+                </td>
+                
+
+            </tr>
+        }
+
+    </table>
+</div>

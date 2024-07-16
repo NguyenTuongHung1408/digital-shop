@@ -1,0 +1,10 @@
+﻿<div class="list-group">
+    <a href="@Url.Action("Index","Category")" class="list-group-item list-group-item-action">Tất cả sản phẩm</a>
+
+    @foreach (var item in ViewBag.NsxList)
+    {
+        <a href="@Url.Action("ListProductNSX/" + item.IDnsx,"Category")" class="list-group-item list-group-item-action">@item.TenNSX</a>
+
+    }
+
+</div>

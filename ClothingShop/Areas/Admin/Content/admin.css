@@ -1,0 +1,29 @@
+.admin-layout{
+    display: flex;
+}
+
+.admin-selection-left{
+   
+
+    z-index: 1000;
+    position: fixed;
+    
+    width: 20%;
+    height: 100%;
+    /*margin-left: -250px;*/
+    
+    background: #333333;
+}
+
+.list-group-item{
+    background: none;
+    color: #fff;
+}
+
+.selection-item{
+    margin-top: 100px;
+}
+
+.admin-selection-right{
+    padding-left: 400px;
+}
