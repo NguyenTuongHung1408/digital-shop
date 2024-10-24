@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Báo cáo thống kê";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+ 
+
+<div class="admin-layout">
+    <div class="admin-selection-left">
+        <!-- Menu điều hướng -->
+    </div>
+    <div class="admin-selection-right">
+        <h1>Báo cáo thống kê</h1>
+        <div id="report">
+            <!-- Nội dung báo cáo sẽ được chèn vào đây -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: '@Url.Action("GetReportData", "Admin")',
+            method: 'GET',
+            success: function(data) {
+                $('#report').html(`
+                    <p>Doanh thu: ${data.Revenue}</p>
+                    <p>Tổng đơn hàng: ${data.TotalOrders}</p>
+                `);
+            }
+        });
+    });
+</script>

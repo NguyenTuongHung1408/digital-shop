@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ var vndMoney = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+@{ var vndMoney = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); } /*Sử dụng CultureInfo để định dạng tiền tệ theo kiểu Việt Nam Đồng (VND).*/
 @{ var user = Session["Account"] as ClothingShop.Models.Customer;}
 
 
@@ -15,7 +15,7 @@
                 <img style="width: 100%;" src="~/Images/@ViewBag.Product.ImagePro" alt="">
             </div>
 
-            <div class="col-lg-7" style="padding: 10px 55px;" >
+            <div class="col-lg-7" style="padding: 10px 55px;">
                 <h2>@ViewBag.Product.ProductName</h2>
 
                 <div class="price-detail"> giá: <h3>@String.Format(vndMoney, "{0:c0}", ViewBag.Product.price)</h3></div>
@@ -66,7 +66,7 @@
 
         <div class="container page-body">
             <div class="text-center mb-4">
-                <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+                <h2 class="section-title px-5"><span class="px-2">Chúc bạn ngày mới</span></h2>
             </div>
             <div class=" row product-list">
 

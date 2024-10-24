@@ -166,19 +166,19 @@ namespace ClothingShop.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // Xóa tất cả các bản ghi liên quan trong OrderDetails
+            var orderDetails = db.OrderDetails.Where(od => od.ProductID == id).ToList();
+            foreach (var detail in orderDetails)
+            {
+                db.OrderDetails.Remove(detail);
+            }
+
+            // Sau đó xóa sản phẩm
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+    
     }
 }
